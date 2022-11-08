@@ -30,8 +30,6 @@ def test():
             FlatIterator(list_of_lists_1),
             ['a', 'b', 'c', 'd', 'e', 'f', 'h', False, 1, 2, None]
     ):
-        print(flat_iterator_item)
-        # print(check_item)
         assert flat_iterator_item == check_item
     assert list(FlatIterator(list_of_lists_1)) == ['a', 'b', 'c', 'd', 'e', 'f', 'h', False, 1, 2, None]
 
