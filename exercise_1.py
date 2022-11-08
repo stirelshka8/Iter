@@ -3,15 +3,21 @@ class FlatIterator:
         self.list_of_list = list_of_list
 
     def __iter__(self):
-        self.len_list = len(self.list_of_list)
-        self.main_list_cursor = 0
-        self.nested_list_cursor = 0
+        self.list_iter = iter(self.list_of_list)
+        self.nested_list = []
+        self.cursor = -1
         return self
 
     def __next__(self):
+        self.cursor += 1
+        if len(self.nested_list) == self.cursor:
+            self.nested_list = None
+            self.cursor = 0
 
+            while not self.nested_list:
+                self.nested_list = next(self.list_iter)
 
-        return item
+        return self.nested_list[self.cursor]
 
 
 def test():
@@ -25,7 +31,7 @@ def test():
             ['a', 'b', 'c', 'd', 'e', 'f', 'h', False, 1, 2, None]
     ):
         print(flat_iterator_item)
-        print(check_item)
+        # print(check_item)
         assert flat_iterator_item == check_item
     assert list(FlatIterator(list_of_lists_1)) == ['a', 'b', 'c', 'd', 'e', 'f', 'h', False, 1, 2, None]
 
